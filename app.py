@@ -4,13 +4,14 @@ import requests
 import json
 import time
 import streamlit as st
-
+import os
+api_key = os.getenv("OPENROUTER_API_KEY")
 
 # === CONFIG ===
 FAISS_INDEX_PATH = "bge_m3_faiss.index"
 DOCUMENTS_PATH = "bge_m3_documents.json"
 EMBEDDING_MODEL_NAME = "BAAI/bge-m3"
-api_key = "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"
+# api_key = "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"
 # apexion-ai/Nous-1-2B  طول کشید تا جواب داد 
 #                                                                                                                                                        
 TOP_K = 1  # Number of retrieved passages to include
@@ -145,8 +146,11 @@ if st.button("پرسیدن سوال") and query.strip():
         retrieved = search_faiss_index(query, embedder, index, documents, k=TOP_K)
         context_text = "\n\n".join([r["content"] for r in retrieved])
         answer = call_llm(query, context_text)
-        clean_answer = answer.replace("```", "").replace("---", "").strip()
-        st.success(f"✅ پاسخ:\n\n{clean_answer}")
+        if answer:
+           clean_answer = answer.replace("```", "").replace("---", "").strip()
+           st.success(f"✅ پاسخ:\n\n{clean_answer}")
+        else:
+            st.error("❌ مشکلی در ارتباط با مدل وجود دارد. لطفاً بعداً دوباره تلاش کنید.")   
         if show_context:
             st.markdown("---")
             st.markdown("### 📚 متون بازیابی‌شده:")
