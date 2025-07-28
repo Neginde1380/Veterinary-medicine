@@ -3,7 +3,7 @@
 import faiss
 import json
 import numpy as np
-from sentence_transformers import SentenceTransformer
+
 
 def load_faiss_index(index_path):
     return faiss.read_index(index_path)
