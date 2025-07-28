@@ -12,7 +12,7 @@ DOCUMENTS_PATH = "bge_m3_documents.json"
 EMBEDDING_MODEL_NAME = "BAAI/bge-m3"
 # api_key = "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"
 # apexion-ai/Nous-1-2B  طول کشید تا جواب داد 
-api_key = st.secrets["api_key"]                                                                                                                                                     
+api_key = st.secrets["OPENROUTER_API_KEY"]                                                                                                                                                     
 TOP_K = 1  # Number of retrieved passages to include
 
 # === Load models and data ===
