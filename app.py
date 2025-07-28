@@ -149,7 +149,8 @@ if st.button("پرسیدن سوال") and query.strip():
            clean_answer = answer.replace("```", "").replace("---", "").strip()
            st.success(f"✅ پاسخ:\n\n{clean_answer}")
         else:
-            st.error("❌ مشکلی در ارتباط با مدل وجود دارد. لطفاً بعداً دوباره تلاش کنید.")   
+            st.error(f"❌ API Error {answer.status_code}: {answer.text}")
+
         if show_context:
             st.markdown("---")
             st.markdown("### 📚 متون بازیابی‌شده:")
