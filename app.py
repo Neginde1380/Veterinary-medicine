@@ -65,80 +65,106 @@ def call_llm(query, context, max_retries=3):
 
 
 # === Streamlit UI ===
-st.set_page_config(page_title="چت‌بات دامپزشکی", page_icon="🐾")
+st.set_page_config(page_title="اداره کل دامپزشکی استان اصفهان", layout="centered")
 
-# === Persian Font & Styling ===
-st.markdown("""
-    <style>
-    @font-face {
-        font-family: 'Vazirmatn';
-        src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@latest/dist/webfonts/Vazirmatn-Regular.woff2') format('woff2');
-        font-weight: normal;
-    }
+sst.markdown("""
+<style>
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@latest/dist/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@latest/dist/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: bold;
+}
 
-    @font-face {
-        font-family: 'Vazirmatn';
-        src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@latest/dist/webfonts/Vazirmatn-Bold.woff2') format('woff2');
-        font-weight: bold;
-    }
+html, body, [class*="css"] {
+    font-family: 'Vazirmatn', sans-serif !important;
+    direction: rtl;
+    font-size: 18px;
+    color: var(--text-color, #212121);
+    background-color: var(--background-color, #f9fbe7);
+}
 
-    html, body, [class*="css"] {
-        font-family: 'Vazirmatn', sans-serif !important;
-        direction: rtl;
-        font-size: 18px;
-    }
+.stApp {
+    padding: 2rem;
+    background: var(--background-color, #f9fbe7);
+}
 
-    .stApp {
-        background: linear-gradient(135deg, #e8f5e9, #f1f8e9, #ffffff);
-        padding: 2rem;
-    }
+.stTextInput input, .stTextArea textarea {
+    text-align: right !important;
+    font-size: 18px !important;
+    padding: 16px !important;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    color: #212121 !important;
+}
 
-    .stTextInput input, .stTextArea textarea {
-        text-align: right !important;
-        font-size: 18px !important;
-        padding: 16px !important;
-        border-radius: 10px;
-    }
+.stButton > button {
+    background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%) !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 14px 32px !important;
+    font-size: 17px !important;
+    font-weight: bold;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
 
-    .stButton > button {
-        background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%) !important;
-        color: white !important;
-        border-radius: 10px;
-        padding: 14px 32px !important;
-        font-size: 17px !important;
-        font-weight: bold;
-        font-family: 'Vazirmatn', sans-serif !important;
-    }
+h1, h3 {
+    text-align: center;
+    font-family: 'Vazirmatn', sans-serif !important;
+    margin-bottom: 1rem;
+}
 
-    h1 {
-        color: #1b5e20 !important;
-        text-align: center;
-        font-size: 36px !important;
-        margin-bottom: 2rem;
-    }
+h1 {
+    font-size: 36px;
+    color: #2e7d32;
+}
 
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
+h3 {
+    font-size: 22px;
+    color: #558b2f;
+    margin-bottom: 2rem;
+}
 
-    .stTextArea, .stCheckbox, .stButton, .stMarkdown {
-        margin-bottom: 1.5rem;
-    }
+.stTextArea, .stCheckbox, .stButton, .stMarkdown {
+    margin-bottom: 1.5rem;
+}
 
-    .stMarkdown {
-        font-size: 18px !important;
-        line-height: 1.9 !important;
+.stMarkdown {
+    font-size: 18px !important;
+    line-height: 1.9 !important;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    color: #212121 !important;
+}
+
+/* Dark mode override (Streamlit doesn’t natively support CSS media queries, but we do this in safe way) */
+@media (prefers-color-scheme: dark) {
+    html, body, .stApp {
+        background-color: #121212 !important;
+        color: #e0e0e0 !important;
     }
-    </style>
+    .stTextInput input, .stTextArea textarea, .stMarkdown {
+        background-color: #1e1e1e !important;
+        color: #f5f5f5 !important;
+    }
+}
+</style>
 """, unsafe_allow_html=True)
 
+
 # === Centered Title with Markdown ===
-st.markdown("<h1>🐾 دستیار هوشمند دامپزشکی</h1>", unsafe_allow_html=True)
+st.markdown("<h1>اداره کل دامپزشکی استان اصفهان</h1>", unsafe_allow_html=True)
+st.markdown("<h3>دستیار هوشمند</h3>", unsafe_allow_html=True)
+
 
 # === UI Elements ===
-query = st.text_area("✍️ چه سوالی درباره دامپزشکی داری؟", height=120)
-show_context = st.checkbox("نمایش متن‌های مرتبط بازیابی‌شده")
+query = st.text_area("✍️ چه سوالی درباره دامپزشکی داری؟", height=140)
 
 if st.button("پرسیدن سوال") and query.strip():
     with st.spinner("🔍 در حال پردازش..."):
@@ -146,15 +172,21 @@ if st.button("پرسیدن سوال") and query.strip():
         context_text = "\n\n".join([r["content"] for r in retrieved])
         answer = call_llm(query, context_text)
         if answer:
-           clean_answer = answer.replace("```", "").replace("---", "").strip()
-           st.success(f"✅ پاسخ:\n\n{clean_answer}")
+            clean_answer = answer.replace("```", "").replace("---", "").strip()
+            st.markdown("### ✅ پاسخ:")
+            st.markdown(
+                f"<div style='background-color:rgba(255,255,255,0.85); color:#212121; padding:16px; border-radius:10px;'>{clean_answer}</div>",
+                unsafe_allow_html=True
+            )
         else:
             st.error(f"❌ API Error {answer.status_code}: {answer.text}")
 
-        if show_context:
-            st.markdown("---")
-            st.markdown("### 📚 متون بازیابی‌شده:")
-            for i, doc in enumerate(retrieved, 1):
-                st.markdown(f"**{i}.** {doc['content']}")
+    show_context = st.checkbox("نمایش متن‌های مرتبط بازیابی‌شده")
+    if show_context:
+        st.markdown("---")
+        st.markdown("### 📚 متون بازیابی‌شده:")
+        for i, doc in enumerate(retrieved, 1):
+            st.markdown(f"**{i}.** {doc['content']}")
 else:
     st.info("منتظر سوال شما هستم...")
+
