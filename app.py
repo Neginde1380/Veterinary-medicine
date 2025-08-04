@@ -69,77 +69,114 @@ st.set_page_config(page_title="اداره کل دامپزشکی استان اص�
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
-/* Remove default Streamlit padding and margin */
-.block-container {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-    max-width: 800px !important;
-}
-/* Hide Streamlit menu and footer */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
 html, body, [class*="css"] {
     font-family: 'Vazirmatn', sans-serif !important;
     direction: rtl;
-    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #f9fbe7 100%);
+    background-color: #f5f5f5;
+    color: #212121;
     margin: 0;
     padding: 0;
 }
+
 .stApp {
-    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 50%, #f9fbe7 100%);
-    min-height: 100vh;
-}
-/* Header Section with gradient and icon */
-.header-container {
-    background: #4caf50; /* رنگ ساده بدون گرادینت */
-    padding: 1.5rem 1rem;
-    border-radius: 0 0 20px 20px;
-    margin: -1rem -1rem 2rem -1rem;
-    text-align: center;
-    box-shadow: none; /* حذف سایه */
-    position: relative;
-}
-.header-container::before {
-    content: none;  /* حذف انیمیشن بک‌گراند */
+    background-color: #f5f5f5;
 }
 
-/* Main content card */
-.main-card {
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: none; /* حذف افکت سایه */
-    border: 1px solid #e0e0e0;
+.block-container {
+    max-width: 800px;
+    padding: 1rem;
 }
-/* Input styling */
+
+#MainMenu, footer, header {
+    visibility: hidden;
+}
+
+.header-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 0.3rem;
+}
+
+.header-container p {
+    font-size: 1.1rem;
+    color: #4e4e4e;
+    margin-top: 0;
+}
+
 .stTextArea textarea {
-    background: #f9f9f9 !important;
-    border: 1px solid #ccc !important;
-    box-shadow: none !important;
+    text-align: right;
+    font-size: 16px;
+    padding: 1rem;
+    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
 }
 
 .stButton > button {
-    background: #4caf50 !important;
-    box-shadow: none !important;
-    transition: none !important;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    width: 100%;
 }
+
 .stButton > button:hover {
-    transform: none !important;
-    box-shadow: none !important;
+    background-color: #388e3c;
 }
+
 .answer-container {
-    background: #fdfdfd;
-    border: 1px solid #4caf50;
-    box-shadow: none;
+    background-color: #ffffff;
+    border-left: 5px solid #4caf50;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #212121;
 }
 .context-container {
-    background: #f7f7f7;
-    border: 1px solid #d0d0d0;
-    box-shadow: none;
+    background: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
 }
-            
+
+.context-item {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+@media (prefers-color-scheme: dark) {
+    html, body, .stApp {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+    }
+    .stTextArea textarea {
+        background-color: #2c2c2c;
+        color: #f0f0f0;
+        border: 1px solid #555;
+    }
+    .stButton > button {
+        background-color: #66bb6a;
+        color: black;
+    }
+    .answer-container {
+        background-color: #2a2a2a;
+        color: #f0f0f0;
+        border-left: 5px solid #81c784;
+    }
+}            
 </style>
 """, unsafe_allow_html=True)
                                                                                                                                                                                                                                                             
@@ -149,9 +186,8 @@ html, body, [class*="css"] {
 # === Centered Title with Markdown ===
 st.markdown("""
 <div class="header-container">
-    <div class="header-icon">🏥</div>
-st.markdown("<h1>اداره کل دامپزشکی استان اصفهان</h1>", unsafe_allow_html=True)
-<p class="header-subtitle">دستیار هوشمندن</p>
+    <h1>اداره کل دامپزشکی استان اصفهان</h1>
+    <p>دستیار هوشمند</p>
 </div>
 """, unsafe_allow_html=True)
 with st.container():
@@ -169,7 +205,7 @@ if st.button("🚀 پرسیدن سوال", use_container_width=True) and query.s
             clean_answer = answer.replace("```", "").replace("---", "").strip()
             st.markdown("""
             <div class="answer-container">
-                <div class="answer-title">✅ پاسخ:</div>
+                <div class="answer-title" style="font-weight: bold; margin-bottom: 1rem;">✅ پاسخ:</div>        
                     <div>{}</div>
             </div>
             """.format(clean_answer), unsafe_allow_html=True)
