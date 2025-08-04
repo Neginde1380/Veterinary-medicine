@@ -187,7 +187,7 @@ html, body, [class*="css"] {
 st.markdown("""
 <div class="header-container">
     <h1>اداره کل دامپزشکی استان اصفهان</h1>
-    <p>دستیار هوشمند</p>
+    <p style="font-weight: bold; font-size: 1.2rem; margin-top: 1rem;">دستیار هوشمند</p>
 </div>
 """, unsafe_allow_html=True)
 with st.container():
@@ -196,7 +196,7 @@ with st.container():
 # === UI Elements ===
 query = st.text_area("✍️ چه سوالی درباره دامپزشکی داری؟", height=120)
 
-if st.button("🚀 پرسیدن سوال", use_container_width=True) and query.strip():
+if st.button(" پرسیدن سوال", use_container_width=True) and query.strip():
     with st.spinner("🔍 در حال پردازش..."):
         retrieved = search_faiss_index(query, embedder, index, documents, k=TOP_K)
         context_text = "\n\n".join([r["content"] for r in retrieved])
