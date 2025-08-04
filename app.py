@@ -93,187 +93,53 @@ html, body, [class*="css"] {
 }
 /* Header Section with gradient and icon */
 .header-container {
-    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 50%, #4caf50 100%);
-    padding: 2rem 1rem;
-    border-radius: 0 0 25px 25px;
+    background: #4caf50; /* رنگ ساده بدون گرادینت */
+    padding: 1.5rem 1rem;
+    border-radius: 0 0 20px 20px;
     margin: -1rem -1rem 2rem -1rem;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(46, 125, 50, 0.3);
+    box-shadow: none; /* حذف سایه */
     position: relative;
-    overflow: hidden;
 }
 .header-container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-    animation: float 20s linear infinite;
-@keyframes float {
-    0% { transform: translateX(-100px) translateY(-100px); }
-    100% { transform: translateX(100px) translateY(100px); }
-}
-.header-title {
-    color: white !important;
-    font-size: 2.5rem !important;
-    font-weight: 700 !important;
-    margin: 0 !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 1;
+    content: none;  /* حذف انیمیشن بک‌گراند */
 }
 
-.header-subtitle {
-    color: rgba(255,255,255,0.9) !important;
-    font-size: 1.3rem !important;
-    font-weight: 400 !important;
-    margin: 0.5rem 0 0 0 !important;
-    position: relative;
-    z-index: 1;
-}
-.header-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
-}
 /* Main content card */
 .main-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    margin-bottom: 2rem;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: none; /* حذف افکت سایه */
+    border: 1px solid #e0e0e0;
 }
 /* Input styling */
 .stTextArea textarea {
-    text-align: right !important;
-    font-size: 16px !important;
-    padding: 20px !important;
-    border-radius: 15px !important;
-    background: rgba(255, 255, 255, 0.9) !important;
-    border: 2px solid #e0e0e0 !important;
-    color: #2c2c2c !important;
-    font-family: 'Vazirmatn', sans-serif !important;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background: #f9f9f9 !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
 }
-.stTextArea textarea:focus {
-    border-color: #4caf50 !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important;
-}
-/* Button styling */
+
 .stButton > button {
-    background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%) !important;
-    color: white !important;
-    border-radius: 15px !important;
-    padding: 16px 40px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    font-family: 'Vazirmatn', sans-serif !important;
-    border: none !important;
-    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3) !important;
-    transition: all 0.3s ease !important;
-    width: 100% !important;
+    background: #4caf50 !important;
+    box-shadow: none !important;
+    transition: none !important;
 }
 .stButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 12px 25px rgba(46, 125, 50, 0.4) !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
-/* Answer section */
 .answer-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 1.5rem 0;
-    border-left: 5px solid #4caf50;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    font-size: 16px;
-    line-height: 1.8;
-    color: #2c2c2c;
+    background: #fdfdfd;
+    border: 1px solid #4caf50;
+    box-shadow: none;
 }
-.answer-title {
-    color: #2e7d32 !important;
-    font-size: 1.4rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 1rem !important;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-/* Context section */
 .context-container {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    border: 1px solid rgba(76, 175, 80, 0.2);
+    background: #f7f7f7;
+    border: 1px solid #d0d0d0;
+    box-shadow: none;
 }
-.context-item {
-    background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-left: 3px solid #4caf50;
-    font-size: 14px;
-    line-height: 1.6;
-}
-/* Loading spinner */
-.stSpinner > div {
-    text-align: center;
-    color: #4caf50 !important;
-}
-/* Info box */
-.stInfo {
-    background: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 100%) !important;
-    border-radius: 15px !important;
-    border-left: 5px solid #4caf50 !important;
-    padding: 1.5rem !important;
-    font-size: 16px !important;
-}
-/* Checkbox */
-.stCheckbox {
-    margin-top: 1rem;
-}
-.stCheckbox label {
-    font-size: 15px !important;
-    color: #2e7d32 !important;
-    font-weight: 500 !important;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .header-title {
-        font-size: 2rem !important;
-    }
-    
-    .header-subtitle {
-        font-size: 1.1rem !important;
-    }
-    
-    .main-card {
-        padding: 1.5rem;
-        margin: 0 0.5rem;
-    }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .main-card, .answer-container, .context-container {
-        background: rgba(30, 30, 30, 0.95) !important;
-        color: #e0e0e0 !important;
-    }
-    
-    .stTextArea textarea {
-        background: rgba(40, 40, 40, 0.9) !important;
-        color: #f0f0f0 !important;
-        border-color: #555 !important;
-    }
-}
+            
 </style>
 """, unsafe_allow_html=True)
                                                                                                                                                                                                                                                             
