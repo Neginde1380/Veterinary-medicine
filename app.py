@@ -208,17 +208,8 @@ if st.button(" پرسیدن سوال", use_container_width=True) and query.strip
                 <div>{clean_answer}</div>
             </div>
             """, unsafe_allow_html=True)
-else:
-    st.error("❌ خطا در دریافت پاسخ از مدل. لطفاً بعداً تلاش کنید.")
 
-    show_context = st.checkbox("📚 نمایش منابع و مراجع استفاده شده")
-    if show_context:
-        st.markdown('<div class="context-container">', unsafe_allow_html=True)
-        st.markdown("**📖 منابع مورد استفاده:**")
-        for i, doc in enumerate(retrieved, 1):
-            st.markdown(f'<div class="context-item"><strong>{i}.</strong> {doc["content"]}</div>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
+
 # Footer
 st.markdown("""
 <div style="text-align: center; margin-top: 3rem; padding: 1rem; color: #666;">
