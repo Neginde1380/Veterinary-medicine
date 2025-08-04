@@ -13,7 +13,7 @@ EMBEDDING_MODEL_NAME = "BAAI/bge-m3"
 # api_key = "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"
 # apexion-ai/Nous-1-2B  طول کشید تا جواب داد 
 api_key = st.secrets["OPENROUTER_API_KEY"]                                                                                                                                                     
-TOP_K = 3  # Number of retrieved passages to include
+TOP_K = 2  # Number of retrieved passages to include
 
 # === Load models and data ===
 @st.cache_resource
@@ -33,7 +33,7 @@ def call_llm(query, context, max_retries=3):
     }
 
     data = {
-        "model": "google/gemma-3-12b-it:free",
+        "model": "google/gemma-3-27b-it:free",
         #deepseek/deepseek-r1-0528-qwen3-8b:free
         "messages": [
             {
@@ -59,9 +59,7 @@ def call_llm(query, context, max_retries=3):
             print(f"⏳ Rate limited. Waiting {wait_time} seconds before retry ({attempt}/{max_retries})...")
             time.sleep(wait_time)
         else:
-            print(f"❌ API Error: {response.status_code}")
-            print(response.text)
-            break
+            return f"❌ API Error {response.status_code}: {response.text}"
     return None
 
 
@@ -204,14 +202,14 @@ if st.button(" پرسیدن سوال", use_container_width=True) and query.strip
         answer = call_llm(query, context_text)
         if answer:
             clean_answer = answer.replace("```", "").replace("---", "").strip()
-            st.markdown("""
+            st.markdown(f"""
             <div class="answer-container">
                 <div class="answer-title" style="font-weight: bold; margin-bottom: 1rem;">✅ پاسخ:</div>        
-                    <div>{}</div>
+                <div>{clean_answer}</div>
             </div>
-            """.format(clean_answer), unsafe_allow_html=True)
-        else:
-            st.error(f"❌ API Error {answer.status_code}: {answer.text}")
+            """, unsafe_allow_html=True)
+else:
+    st.error("❌ خطا در دریافت پاسخ از مدل. لطفاً بعداً تلاش کنید.")
 
     show_context = st.checkbox("📚 نمایش منابع و مراجع استفاده شده")
     if show_context:
