@@ -67,7 +67,7 @@ def call_llm(query, context, max_retries=3):
 # === Streamlit UI ===
 st.set_page_config(page_title="اداره کل دامپزشکی استان اصفهان", layout="centered")
 
-sst.markdown("""
+st.markdown("""
 <style>
 @font-face {
     font-family: 'Vazirmatn';
