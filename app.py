@@ -33,7 +33,7 @@ def call_llm(query, context, max_retries=3):
     }
 
     data = {
-        "model": "google/gemma-3-4b-it:free",
+        "model": "deepseek/deepseek-r1-0528-qwen3-8b:free",
         #deepseek/deepseek-r1-0528-qwen3-8b:free
         "messages": [
             {
